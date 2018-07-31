@@ -1,4 +1,4 @@
-emercoin               ICON    "pixmaps/emercoin.ico"
+cryptoruble               ICON    "pixmaps/cryptoruble.ico"
 
 #include "wx/msw/wx.rc"
 

@@ -62,11 +62,11 @@
         <translation>Хүлээн авах хаяг</translation>
     </message>
     <message>
-        <source>These are your Emercoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Cryptoruble addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Эдгээр Биткойн хаягууд нь илгээх хаягууд. Хүлээн авах хаяг болон тоо хэмжээг илгээхээсээ өмнө сайн нягталж үзэж байна уу</translation>
     </message>
     <message>
-        <source>These are your Emercoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Cryptoruble addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Эдгээр Биткойн хаягууд нь хүлээн авах хаягууд. Гүйлгээ болгонд шинээр хаяг үүсгэхийг бид санал болгож байна.</translation>
     </message>
     <message>
@@ -152,8 +152,8 @@
         <translation>Түрүйвч цоожлогдлоо</translation>
     </message>
     <message>
-        <source>Emercoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your emercoins from being stolen by malware infecting your computer.</source>
-        <translation>Цоожлолтын процесыг дуусгахын тулд Емеркойн одоо хаагдана. Ѳѳрийн түрүйвчийг цоожлох нь таны емеркойнуудыг компьютерийн вирус хулгайлахаас бүрэн сэргийлж чадахгүй гэдгийг санаарай.</translation>
+        <source>Cryptoruble will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your cryptorubles from being stolen by malware infecting your computer.</source>
+        <translation>Цоожлолтын процесыг дуусгахын тулд Cryptoruble одоо хаагдана. Ѳѳрийн түрүйвчийг цоожлох нь таны cryptorubleуудыг компьютерийн вирус хулгайлахаас бүрэн сэргийлж чадахгүй гэдгийг санаарай.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
@@ -247,8 +247,8 @@
         <translation>Оношилгоо ба засварын консолыг онгойлго</translation>
     </message>
     <message>
-        <source>Emercoin</source>
-        <translation>Емеркойн</translation>
+        <source>Cryptoruble</source>
+        <translation>Cryptoruble</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -271,8 +271,8 @@
         <translation>&amp;Тусламж</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Emercoin network</source>
-        <translation><numerusform>Емеркойны сүлжээрүү %n идэвхитэй холболт байна </numerusform><numerusform>Емеркойны сүлжээрүү %n идэвхитэй холболтууд байна </numerusform></translation>
+        <source>%n active connection(s) to Cryptoruble network</source>
+        <translation><numerusform>Cryptorubleы сүлжээрүү %n идэвхитэй холболт байна </numerusform><numerusform>Cryptorubleы сүлжээрүү %n идэвхитэй холболтууд байна </numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
@@ -708,8 +708,8 @@ Address: %4
         <translation>Гүйлгээний тѳлбѳр %1-ийг тооцхоор нийт дүн нь таны балансаас хэтрээд байна.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Emercoin address</source>
-        <translation>Анхаар:Буруу Емеркойны хаяг байна</translation>
+        <source>Warning: Invalid Cryptoruble address</source>
+        <translation>Анхаар:Буруу Cryptorubleы хаяг байна</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -754,8 +754,8 @@ Address: %4
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Emercoin Core is shutting down...</source>
-        <translation>Емеркойны цѳм хаагдаж байна...</translation>
+        <source>Cryptoruble Core is shutting down...</source>
+        <translation>Cryptorubleы цѳм хаагдаж байна...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>

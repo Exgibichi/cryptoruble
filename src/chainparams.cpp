@@ -105,7 +105,7 @@ public:
         pchMessageStart[1] = 0xe8;
         pchMessageStart[2] = 0xe9;
         pchMessageStart[3] = 0xe5;
-        nDefaultPort = 6661;
+        nDefaultPort = 20180;
         bnProofOfWorkLimit = ~uint256(0) >> 32;
         bnInitialHashTarget = ~uint256(0) >> 32;
         nEnforceBlockUpgradeMajority = 750;
@@ -156,13 +156,13 @@ public:
         assert(hashGenesisBlock == uint256("0x00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d"));
         assert(genesis.hashMerkleRoot == uint256("0xd8eee032f95716d0cf14231dc7a238b96bbf827e349e75344c9a88e849262ee0"));
 
-        vSeeds.push_back(CDNSSeedData("emercoin.com", "seed.emercoin.com"));
-        vSeeds.push_back(CDNSSeedData("emercoin.net", "seed.emercoin.net"));
+        vSeeds.push_back(CDNSSeedData("cryptoruble.com", "seed.cryptoruble.com"));
+        vSeeds.push_back(CDNSSeedData("cryptoruble.net", "seed.cryptoruble.net"));
         vSeeds.push_back(CDNSSeedData("emergate.net", "seed.emergate.net"));
-        vSeeds.push_back(CDNSSeedData("emcdns", "seed.emc"));
+        vSeeds.push_back(CDNSSeedData("crudns", "seed.cru"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = list_of(33);   // emercoin: addresses begin with 'E'
-        base58Prefixes[SCRIPT_ADDRESS] = list_of(92);   // emercoin: addresses begin with 'e'
+        base58Prefixes[PUBKEY_ADDRESS] = list_of(33);   // cryptoruble: addresses begin with 'E'
+        base58Prefixes[SCRIPT_ADDRESS] = list_of(92);   // cryptoruble: addresses begin with 'e'
         base58Prefixes[SECRET_KEY] =     list_of(128);
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E);
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x88)(0xAD)(0xE4);
@@ -203,7 +203,7 @@ public:
         pchMessageStart[1] = 0xf2;
         pchMessageStart[2] = 0xc0;
         pchMessageStart[3] = 0xef;
-        nDefaultPort = 6663;
+        nDefaultPort = 20182;
         bnProofOfWorkLimit = ~uint256(0) >> 28;
         bnInitialHashTarget = ~uint256(0) >> 29;
         nEnforceBlockUpgradeMajority = 51;
@@ -223,7 +223,7 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("emercoin", "tnseed.emercoin.com"));
+        vSeeds.push_back(CDNSSeedData("cryptoruble", "tnseed.cryptoruble.com"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(111);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(196);
@@ -275,7 +275,7 @@ public:
         //genesis.nNonce = 2;
         nMaxTipAge = 24 * 60 * 60;
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 6664;
+        nDefaultPort = 20183;
         assert(hashGenesisBlock == uint256("0x0000000810da236a5c9239aa1c49ab971de289dbd41d08c4120fc9c8920d2212"));
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.

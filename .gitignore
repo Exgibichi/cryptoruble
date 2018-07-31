@@ -2,11 +2,11 @@
 
 *.exe
 src/bitcoin
-src/emercoind
-src/emercoin-cli
-src/emercoin-tx
-src/test/test_emercoin
-src/qt/test/test_emercoin-qt
+src/cryptorubled
+src/cryptoruble-cli
+src/cryptoruble-tx
+src/test/test_cryptoruble
+src/qt/test/test_cryptoruble-qt
 
 # autoreconf
 Makefile.in
@@ -74,12 +74,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-emercoin-qt
-Emercoin-Qt.app
+cryptoruble-qt
+Cryptoruble-Qt.app
 
 # Unit-tests
 Makefile.test
-emercoin-qt_test
+cryptoruble-qt_test
 src/test/buildenv.py
 
 # Resources cpp

@@ -66,12 +66,12 @@
         <translation>Адреси за получаване</translation>
     </message>
     <message>
-        <source>These are your Emercoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Cryptoruble addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Това са адресите на получателите на плащания. Винаги проверявайте размера на сумата и адреса на получателя, преди да изпратите монети.</translation>
     </message>
     <message>
-        <source>These are your Emercoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Това са Вашите Емеркойн адреси,благодарение на които ще получавате плащания.Препоръчително е да използвате нови адреси за получаване за всяка транзакция.</translation>
+        <source>These are your Cryptoruble addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Това са Вашите Cryptoruble адреси,благодарение на които ще получавате плащания.Препоръчително е да използвате нови адреси за получаване за всяка транзакция.</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -164,8 +164,8 @@
         <translation>Потвърждаване на криптирането</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR EMERCOINS&lt;/b&gt;!</source>
-        <translation>ВНИМАНИЕ: Ако защитите вашият портфейл и изгубите ключовата дума, вие ще &lt;b&gt;ИЗГУБИТЕ ВСИЧКИТЕ СИ ЕМЕРКОЙНОВЕ&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR CRYPTORUBLES&lt;/b&gt;!</source>
+        <translation>ВНИМАНИЕ: Ако защитите вашият портфейл и изгубите ключовата дума, вие ще &lt;b&gt;ИЗГУБИТЕ ВСИЧКИТЕ СИ CRYPTORUBLES&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -184,8 +184,8 @@
         <translation>Портфейлът е криптиран</translation>
     </message>
     <message>
-        <source>Emercoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your emercoins from being stolen by malware infecting your computer.</source>
-        <translation>Емеркоин ще се затоври сега за да завърши процеса на криптиране. Запомнете, че криптирането на вашия портефейл не може напълно да предпази вашите Бит-монети от кражба чрез зловреден софтуер, инфектирал вашия компютър</translation>
+        <source>Cryptoruble will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your cryptorubles from being stolen by malware infecting your computer.</source>
+        <translation>Cryptoruble ще се затоври сега за да завърши процеса на криптиране. Запомнете, че криптирането на вашия портефейл не може напълно да предпази вашите Бит-монети от кражба чрез зловреден софтуер, инфектирал вашия компютър</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
@@ -291,16 +291,16 @@
         <translation>Отвори &amp;URI...</translation>
     </message>
     <message>
-        <source>Emercoin Core client</source>
-        <translation>Emercoin Core клиент</translation>
+        <source>Cryptoruble Core client</source>
+        <translation>Cryptoruble Core клиент</translation>
     </message>
     <message>
-        <source>Send coins to an Emercoin address</source>
-        <translation>Изпращане към Емеркоин адрес</translation>
+        <source>Send coins to an Cryptoruble address</source>
+        <translation>Изпращане към Cryptoruble адрес</translation>
     </message>
     <message>
-        <source>Modify configuration options for Emercoin</source>
-        <translation>Променете настройките на Емеркойн</translation>
+        <source>Modify configuration options for Cryptoruble</source>
+        <translation>Променете настройките на Cryptoruble</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -323,8 +323,8 @@
         <translation>&amp;Проверка на съобщение...</translation>
     </message>
     <message>
-        <source>Emercoin</source>
-        <translation>Емеркоин</translation>
+        <source>Cryptoruble</source>
+        <translation>Cryptoruble</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -339,8 +339,8 @@
         <translation>&amp;Получаване</translation>
     </message>
     <message>
-        <source>Show information about Emercoin Core</source>
-        <translation>Покажете информация за Емеркойн ядрото</translation>
+        <source>Show information about Cryptoruble Core</source>
+        <translation>Покажете информация за Cryptoruble ядрото</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -355,12 +355,12 @@
         <translation>Шифроване на личните ключове,които принадлежат на портфейла Ви.</translation>
     </message>
     <message>
-        <source>Sign messages with your Emercoin addresses to prove you own them</source>
-        <translation>Пишете съобщения със своя Емеркойн адрес за да докажете,че е ваш.</translation>
+        <source>Sign messages with your Cryptoruble addresses to prove you own them</source>
+        <translation>Пишете съобщения със своя Cryptoruble адрес за да докажете,че е ваш.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Emercoin addresses</source>
-        <translation>Потвърждаване на съобщения  за да се знае,че са написани с дадените Емеркойн адреси.</translation>
+        <source>Verify messages to ensure they were signed with specified Cryptoruble addresses</source>
+        <translation>Потвърждаване на съобщения  за да се знае,че са написани с дадените Cryptoruble адреси.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -379,16 +379,16 @@
         <translation>Раздели</translation>
     </message>
     <message>
-        <source>Emercoin Core</source>
-        <translation>Емеркойн ядро</translation>
+        <source>Cryptoruble Core</source>
+        <translation>Cryptoruble ядро</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and emercoin: URIs)</source>
-        <translation>Изискване на плащания(генерира QR кодове и емеркойн: URIs)</translation>
+        <source>Request payments (generates QR codes and cryptoruble: URIs)</source>
+        <translation>Изискване на плащания(генерира QR кодове и cryptoruble: URIs)</translation>
     </message>
     <message>
-        <source>&amp;About Emercoin Core</source>
-        <translation>&amp;Относно Emercoin Core</translation>
+        <source>&amp;About Cryptoruble Core</source>
+        <translation>&amp;Относно Cryptoruble Core</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -399,20 +399,20 @@
         <translation>Покажи списък с използваните адреси и имена.</translation>
     </message>
     <message>
-        <source>Open a emercoin: URI or payment request</source>
-        <translation>Отворете емеркойн: URI  или заявка за плащане</translation>
+        <source>Open a cryptoruble: URI or payment request</source>
+        <translation>Отворете cryptoruble: URI  или заявка за плащане</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Налични команди</translation>
     </message>
     <message>
-        <source>Show the Emercoin Core help message to get a list with possible Emercoin command-line options</source>
-        <translation>Покажи помощните съобщения на Емеркойн за да видиш наличните и валидни команди</translation>
+        <source>Show the Cryptoruble Core help message to get a list with possible Cryptoruble command-line options</source>
+        <translation>Покажи помощните съобщения на Cryptoruble за да видиш наличните и валидни команди</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Emercoin network</source>
-        <translation><numerusform>%n връзка към Емеркоин мрежата</numerusform><numerusform>%n връзки към Емеркоин мрежата</numerusform></translation>
+        <source>%n active connection(s) to Cryptoruble network</source>
+        <translation><numerusform>%n връзка към Cryptoruble мрежата</numerusform><numerusform>%n връзки към Cryptoruble мрежата</numerusform></translation>
     </message>
     <message>
         <source>No block source available...</source>
@@ -748,8 +748,8 @@ Address: %4
         <translation>Вече има адрес "%1" в списъка с адреси.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Emercoin address.</source>
-        <translation>"%1" не е валиден Емеркоин адрес.</translation>
+        <source>The entered address "%1" is not a valid Cryptoruble address.</source>
+        <translation>"%1" не е валиден Cryptoruble адрес.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -786,8 +786,8 @@ Address: %4
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Emercoin Core</source>
-        <translation>Емеркойн ядро</translation>
+        <source>Cryptoruble Core</source>
+        <translation>Cryptoruble ядро</translation>
     </message>
     <message>
         <source>version</source>
@@ -798,8 +798,8 @@ Address: %4
         <translation>(%1-битов)</translation>
     </message>
     <message>
-        <source>About Emercoin Core</source>
-        <translation>За Emercoin Core</translation>
+        <source>About Cryptoruble Core</source>
+        <translation>За Cryptoruble Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -837,12 +837,12 @@ Address: %4
         <translation>Добре дошли</translation>
     </message>
     <message>
-        <source>Welcome to Emercoin Core.</source>
-        <translation>Добре дошли в Емеркойн ядрото.</translation>
+        <source>Welcome to Cryptoruble Core.</source>
+        <translation>Добре дошли в Cryptoruble ядрото.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Emercoin Core will store its data.</source>
-        <translation>Тъй като това е първото стартиране на програмата можете да изберете къде Емеркон ядрото да запази данните си.</translation>
+        <source>As this is the first time the program is launched, you can choose where Cryptoruble Core will store its data.</source>
+        <translation>Тъй като това е първото стартиране на програмата можете да изберете къде cryptoruble ядрото да запази данните си.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -853,8 +853,8 @@ Address: %4
         <translation>Използване на директория ръчно</translation>
     </message>
     <message>
-        <source>Emercoin Core</source>
-        <translation>Емеркойн ядро</translation>
+        <source>Cryptoruble Core</source>
+        <translation>Cryptoruble ядро</translation>
     </message>
     <message>
         <source>Error</source>
@@ -879,12 +879,12 @@ Address: %4
         <translation>&amp;Основни</translation>
     </message>
     <message>
-        <source>Automatically start Emercoin after logging in to the system.</source>
-        <translation>Автоматично включване на Емеркойн след влизане в системата.</translation>
+        <source>Automatically start Cryptoruble after logging in to the system.</source>
+        <translation>Автоматично включване на Cryptoruble след влизане в системата.</translation>
     </message>
     <message>
-        <source>&amp;Start Emercoin on system login</source>
-        <translation>&amp;Пускане на Емеркоин при вход в системата</translation>
+        <source>&amp;Start Cryptoruble on system login</source>
+        <translation>&amp;Пускане на Cryptoruble при вход в системата</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -935,16 +935,16 @@ Address: %4
         <translation>&amp;Похарчете непотвърденото ресто</translation>
     </message>
     <message>
-        <source>Automatically open the Emercoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Автоматично отваряне на входящия Emercoin порт. Работи само с рутери поддържащи UPnP.</translation>
+        <source>Automatically open the Cryptoruble client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Автоматично отваряне на входящия Cryptoruble порт. Работи само с рутери поддържащи UPnP.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Отваряне на входящия порт чрез &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Emercoin network through a SOCKS5 proxy.</source>
-        <translation>Свързване с Емеркойн мрежата чрез SOCKS5  прокси.</translation>
+        <source>Connect to the Cryptoruble network through a SOCKS5 proxy.</source>
+        <translation>Свързване с Cryptoruble мрежата чрез SOCKS5  прокси.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -991,8 +991,8 @@ Address: %4
         <translation>Език:</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Emercoin.</source>
-        <translation>Промяната на езика ще влезе в сила след рестартиране на Емеркоин.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Cryptoruble.</source>
+        <translation>Промяната на езика ще влезе в сила след рестартиране на Cryptoruble.</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
@@ -1050,8 +1050,8 @@ Address: %4
         <translation>Форма</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Emercoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Текущата информация на екрана може да не е актуална. Вашият портфейл ще се синхронизира автоматично с мрежата на Емеркоин, щом поне една връзката с нея се установи; този процес все още не е приключил.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Cryptoruble network after a connection is established, but this process has not completed yet.</source>
+        <translation>Текущата информация на екрана може да не е актуална. Вашият портфейл ще се синхронизира автоматично с мрежата на Cryptoruble, щом поне една връзката с нея се установи; този процес все още не е приключил.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1133,8 +1133,8 @@ Address: %4
         <translation>Възникна грешка по време назаявката за плащане</translation>
     </message>
     <message>
-        <source>Cannot start emercoin: click-to-pay handler</source>
-        <translation>Емеркойн не можe да се стартира: click-to-pay handler</translation>
+        <source>Cannot start cryptoruble: click-to-pay handler</source>
+        <translation>Cryptoruble не можe да се стартира: click-to-pay handler</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1187,8 +1187,8 @@ Address: %4
         <translation>Сума</translation>
     </message>
     <message>
-        <source>Enter an Emercoin address (e.g. %1)</source>
-        <translation>Въведете Емеркойн адрес (например: %1)</translation>
+        <source>Enter an Cryptoruble address (e.g. %1)</source>
+        <translation>Въведете Cryptoruble адрес (например: %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1401,16 +1401,16 @@ Address: %4
         <translation>Лог файл,съдържащ грешките</translation>
     </message>
     <message>
-        <source>Open the Emercoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Отворете Емеркой дебъг лог файла от настоящата Data папка. Може да отнеме няколко секунди при по - големи лог файлове.</translation>
+        <source>Open the Cryptoruble debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Отворете Cryptoruble дебъг лог файла от настоящата Data папка. Може да отнеме няколко секунди при по - големи лог файлове.</translation>
     </message>
     <message>
         <source>Clear console</source>
         <translation>Изчисти конзолата</translation>
     </message>
     <message>
-        <source>Welcome to the Emercoin RPC console.</source>
-        <translation>Добре дошли в Емеркойн RPC конзолата.</translation>
+        <source>Welcome to the Cryptoruble RPC console.</source>
+        <translation>Добре дошли в Cryptoruble RPC конзолата.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -1785,8 +1785,8 @@ Address: %4
         <translation>Платете минималната такса от %1</translation>
     </message>
     <message>
-        <source>Warning: Invalid Emercoin address</source>
-        <translation>Внимание: Невалиден Емеркойн адрес</translation>
+        <source>Warning: Invalid Cryptoruble address</source>
+        <translation>Внимание: Невалиден Cryptoruble адрес</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1875,8 +1875,8 @@ Address: %4
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Emercoin Core is shutting down...</source>
-        <translation>Емеркойн ядрото се изключва...</translation>
+        <source>Cryptoruble Core is shutting down...</source>
+        <translation>Cryptoruble ядрото се изключва...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -1926,7 +1926,7 @@ Address: %4
         <translation>Копиране на текущия подпис</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Emercoin address</source>
+        <source>Sign the message to prove you own this Cryptoruble address</source>
         <translation>Подпишете съобщение като доказателство, че притежавате определен адрес</translation>
     </message>
     <message>
@@ -1942,8 +1942,8 @@ Address: %4
         <translation>&amp;Провери</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Emercoin address</source>
-        <translation>Проверете съобщение, за да сте сигурни че е подписано с определен Емеркоин адрес</translation>
+        <source>Verify the message to ensure it was signed with the specified Cryptoruble address</source>
+        <translation>Проверете съобщение, за да сте сигурни че е подписано с определен Cryptoruble адрес</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2005,12 +2005,12 @@ Address: %4
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Emercoin Core</source>
-        <translation>Емеркойн ядро</translation>
+        <source>Cryptoruble Core</source>
+        <translation>Cryptoruble ядро</translation>
     </message>
     <message>
-        <source>The Emercoin Core developers</source>
-        <translation>Разработчици на Emercoin Core</translation>
+        <source>The Cryptoruble Core developers</source>
+        <translation>Разработчици на Cryptoruble Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2540,7 +2540,7 @@ Address: %4
     </message>
     <message>
         <source>Copyright (C) 2013-%i The Emercoin Core Developers</source>
-        <translation>Всички права запазени (C) 2013-%i Доставчиците на Емеркойн</translation>
+        <translation>Всички права запазени (C) 2013-%i Доставчиците на Cryptoruble</translation>
     </message>
     <message>
         <source>Information</source>

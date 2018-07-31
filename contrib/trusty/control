@@ -1,4 +1,4 @@
-Source: emercoin
+Source: cryptoruble
 Section: utils
 Priority: optional
 Maintainer: Aspanta Limited <info@aspanta.com>
@@ -21,9 +21,9 @@ Build-Depends: build-essential,
  protobuf-compiler,
  python3
 
-Package: emercoin
+Package: cryptoruble
 Architecture: any
-Description: Emercoin Client
+Description: Cryptoruble Client
 Pre-Depends: debconf
 Depends: ${shlibs:Depends},
  openssl,

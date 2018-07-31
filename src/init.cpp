@@ -29,7 +29,7 @@
 #include "wallet.h"
 #include "walletdb.h"
 #endif
-#include "emcdns.h"
+#include "crudns.h"
 
 #include <stdint.h>
 #include <stdio.h>
@@ -54,7 +54,7 @@ using namespace std;
 CWallet* pwalletMain = NULL;
 #endif
 bool fFeeEstimatesInitialized = false;
-EmcDns* emcdns = NULL;
+CruDns* crudns = NULL;
 
 #ifdef WIN32
 // Win32 LevelDB doesn't use filedescriptors, and the ones used for
@@ -143,8 +143,8 @@ static CCoinsViewErrorCatcher *pcoinscatcher = NULL;
 void Shutdown()
 {
     LogPrintf("%s: In progress...\n", __func__);
-    if (emcdns)
-        delete emcdns;
+    if (crudns)
+        delete crudns;
     static CCriticalSection cs_Shutdown;
     TRY_LOCK(cs_Shutdown, lockShutdown);
     if (!lockShutdown)
@@ -154,7 +154,7 @@ void Shutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("emercoin-shutoff");
+    RenameThread("cryptoruble-shutoff");
     mempool.AddTransactionsUpdated(1);
     StopRPCThreads();
 #ifdef ENABLE_WALLET
@@ -254,7 +254,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += "  -checkblocks=<n>       " + strprintf(_("How many blocks to check at startup (default: %u, 0 = all)"), 288) + "\n";
     strUsage += "  -checklevel=<n>        " + strprintf(_("How thorough the block verification of -checkblocks is (0-4, default: %u)"), 3) + "\n";
     strUsage += "  -checkpointpubkey      " + _("Set checkpoint public key. 0 - disable, 1 - default key, hex string - custom key");
-    strUsage += "  -conf=<file>           " + strprintf(_("Specify configuration file (default: %s)"), "emercoin.conf") + "\n";
+    strUsage += "  -conf=<file>           " + strprintf(_("Specify configuration file (default: %s)"), "cryptoruble.conf") + "\n";
     if (mode == HMM_BITCOIND)
     {
 #if !defined(WIN32)
@@ -267,7 +267,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += "  -maxorphantx=<n>       " + strprintf(_("Keep at most <n> unconnectable transactions in memory (default: %u)"), DEFAULT_MAX_ORPHAN_TRANSACTIONS) + "\n";
     strUsage += "  -par=<n>               " + strprintf(_("Set the number of script verification threads (%u to %d, 0 = auto, <0 = leave that many cores free, default: %d)"), -(int)boost::thread::hardware_concurrency(), MAX_SCRIPTCHECK_THREADS, DEFAULT_SCRIPTCHECK_THREADS) + "\n";
 #ifndef WIN32
-    strUsage += "  -pid=<file>            " + strprintf(_("Specify pid file (default: %s)"), "emercoind.pid") + "\n";
+    strUsage += "  -pid=<file>            " + strprintf(_("Specify pid file (default: %s)"), "cryptorubled.pid") + "\n";
 #endif
     strUsage += "  -reindex               " + _("Rebuild block chain index from current blk000??.dat files") + " " + _("on startup") + "\n";
 #if !defined(WIN32)
@@ -293,7 +293,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += "  -onion=<ip:port>       " + strprintf(_("Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)"), "-proxy") + "\n";
     strUsage += "  -onlynet=<net>         " + _("Only connect to nodes in network <net> (ipv4, ipv6 or onion)") + "\n";
     strUsage += "  -permitbaremultisig    " + strprintf(_("Relay non-P2SH multisig (default: %u)"), 1) + "\n";
-    strUsage += "  -port=<port>           " + strprintf(_("Listen for connections on <port> (default: %u or testnet: %u)"), 6661, 6663) + "\n";
+    strUsage += "  -port=<port>           " + strprintf(_("Listen for connections on <port> (default: %u or testnet: %u)"), 20180, 20182) + "\n";
     strUsage += "  -proxy=<ip:port>       " + _("Connect through SOCKS5 proxy") + "\n";
     strUsage += "  -seednode=<ip>         " + _("Connect to a node to retrieve peer addresses, and disconnect") + "\n";
     strUsage += "  -timeout=<n>           " + strprintf(_("Specify connection timeout in milliseconds (minimum: 1, default: %d)"), DEFAULT_CONNECT_TIMEOUT) + "\n";
@@ -313,8 +313,8 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += "  -disablewallet         " + _("Do not load the wallet and disable wallet RPC calls") + "\n";
     strUsage += "  -keypool=<n>           " + strprintf(_("Set key pool size to <n> (default: %u)"), 100) + "\n";
     if (GetBoolArg("-help-debug", false))
-        strUsage += "  -mintxfee=<amt>        " + strprintf(_("Fees (in EMC/Kb) smaller than this are considered zero fee for transaction creation (default: %s)"), FormatMoney(CWallet::minTxFee.GetFeePerK())) + "\n";
-    strUsage += "  -paytxfee=<amt>        " + strprintf(_("Fee (in EMC/kB) to add to transactions you send (default: %s)"), FormatMoney(payTxFee.GetFeePerK())) + "\n";
+        strUsage += "  -mintxfee=<amt>        " + strprintf(_("Fees (in CRU/Kb) smaller than this are considered zero fee for transaction creation (default: %s)"), FormatMoney(CWallet::minTxFee.GetFeePerK())) + "\n";
+    strUsage += "  -paytxfee=<amt>        " + strprintf(_("Fee (in CRU/kB) to add to transactions you send (default: %s)"), FormatMoney(payTxFee.GetFeePerK())) + "\n";
     strUsage += "  -rescan                " + _("Rescan the block chain for missing wallet transactions") + " " + _("on startup") + "\n";
     strUsage += "  -salvagewallet         " + _("Attempt to recover private keys from a corrupt wallet.dat") + " " + _("on startup") + "\n";
     strUsage += "  -spendzeroconfchange   " + strprintf(_("Spend unconfirmed change when sending transactions (default: %u)"), 1) + "\n";
@@ -358,7 +358,7 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += "  -relaypriority         " + strprintf(_("Require high priority for relaying free or low-fee transactions (default:%u)"), 1) + "\n";
         strUsage += "  -maxsigcachesize=<n>   " + strprintf(_("Limit size of signature cache to <n> entries (default: %u)"), 50000) + "\n";
     }
-    strUsage += "  -minrelaytxfee=<amt>   " + strprintf(_("Fees (in EMC/Kb) smaller than this are considered zero fee for relaying (default: %s)"), FormatMoney(::minRelayTxFee.GetFeePerK())) + "\n";
+    strUsage += "  -minrelaytxfee=<amt>   " + strprintf(_("Fees (in CRU/Kb) smaller than this are considered zero fee for relaying (default: %s)"), FormatMoney(::minRelayTxFee.GetFeePerK())) + "\n";
     strUsage += "  -printtoconsole        " + _("Send trace/debug info to console instead of debug.log file") + "\n";
     if (GetBoolArg("-help-debug", false))
     {
@@ -386,7 +386,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += "  -rpcbind=<addr>        " + _("Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)") + "\n";
     strUsage += "  -rpcuser=<user>        " + _("Username for JSON-RPC connections") + "\n";
     strUsage += "  -rpcpassword=<pw>      " + _("Password for JSON-RPC connections") + "\n";
-    strUsage += "  -rpcport=<port>        " + strprintf(_("Listen for JSON-RPC connections on <port> (default: %u or testnet: %u)"), 6662, 6662) + "\n";
+    strUsage += "  -rpcport=<port>        " + strprintf(_("Listen for JSON-RPC connections on <port> (default: %u or testnet: %u)"), 20181, 20181) + "\n";
     strUsage += "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified source. Valid for <ip> are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times") + "\n";
     strUsage += "  -rpcthreads=<n>        " + strprintf(_("Set the number of threads to service RPC calls (default: %d)"), 4) + "\n";
     strUsage += "  -rpckeepalive          " + strprintf(_("RPC support for HTTP persistent connections (default: %d)"), 1) + "\n";
@@ -437,7 +437,7 @@ struct CImportingNow
 
 void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
 {
-    RenameThread("emercoin-loadblk");
+    RenameThread("cryptoruble-loadblk");
 
     // -reindex
     if (fReindex) {
@@ -597,7 +597,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     fLogIPs = GetBoolArg("-logips", false);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Emercoin version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
+    LogPrintf("Cryptoruble version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
 
     // when specifying an explicit binding address, you want to listen on it
     // even when -connect or -proxy is specified
@@ -790,7 +790,7 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     // Sanity check
     if (!InitSanityCheck())
-        return InitError(_("Initialization sanity check failed. Emercoin Core is shutting down."));
+        return InitError(_("Initialization sanity check failed. Cryptoruble Core is shutting down."));
 
     std::string strDataDir = GetDataDir().string();
 #ifdef ENABLE_WALLET
@@ -804,7 +804,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Emercoin Core is probably already running."), strDataDir));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Cryptoruble Core is probably already running."), strDataDir));
 #ifndef WIN32
     CreatePidFile(GetPidFile(), getpid());
 #endif
@@ -843,7 +843,7 @@ bool AppInit2(boost::thread_group& threadGroup)
         StartRPCThreads();
     }
 
-    // emercoin: allow user to set alert and checkpoint pubkeys
+    // cryptoruble: allow user to set alert and checkpoint pubkeys
     {
         string ak = GetArg("-alertpubkey", "1");
         if (ak == "1")
@@ -1067,7 +1067,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     nCoinCacheSize = nTotalCache / 300; // coins in memory require around 300 bytes
 
     bool fLoaded = false;
-    int fAuxReindex = 0;   // emercoin: used when upgrading pre-auxpow blockindex
+    int fAuxReindex = 0;   // cryptoruble: used when upgrading pre-auxpow blockindex
     while (!fLoaded) {
         bool fReset = fReindex;
         std::string strLoadError;
@@ -1143,7 +1143,7 @@ bool AppInit2(boost::thread_group& threadGroup)
         if (!fLoaded) {
             // first suggest a reindex
             if (!fReset) {
-                // emercoin: try to reindex if no auxpow flag
+                // cryptoruble: try to reindex if no auxpow flag
                 bool fAuxPow;
                 if (fAuxReindex == 1 && (!pblocktree->ReadFlag("auxpow2", fAuxPow) || !fAuxPow))
                 {
@@ -1181,7 +1181,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     }
     LogPrintf(" block index %15dms\n", GetTimeMillis() - nStart);
 
-    // emercoin: check in nameindex need to be created or recreated
+    // cryptoruble: check in nameindex need to be created or recreated
     // we should have block index fully loaded by now
     extern bool createNameIndexFile();
     if (!filesystem::exists(GetDataDir() / "nameindexV2.dat") && !createNameIndexFile())
@@ -1238,10 +1238,10 @@ bool AppInit2(boost::thread_group& threadGroup)
                 InitWarning(msg);
             }
             else if (nLoadWalletRet == DB_TOO_NEW)
-                strErrors << _("Error loading wallet.dat: Wallet requires newer version of Emercoin Core") << "\n";
+                strErrors << _("Error loading wallet.dat: Wallet requires newer version of Cryptoruble Core") << "\n";
             else if (nLoadWalletRet == DB_NEED_REWRITE)
             {
-                strErrors << _("Wallet needed to be rewritten: restart Emercoin Core to complete") << "\n";
+                strErrors << _("Wallet needed to be rewritten: restart Cryptoruble Core to complete") << "\n";
                 LogPrintf("%s", strErrors.str());
                 return InitError(strErrors.str());
             }
@@ -1401,21 +1401,21 @@ bool AppInit2(boost::thread_group& threadGroup)
     }
 #endif
 
-    // init emcdns. WARNING: this should be done after hooks initialization
-    if (GetBoolArg("-emcdns", false))
+    // init crudns. WARNING: this should be done after hooks initialization
+    if (GetBoolArg("-crudns", false))
     {
-        #define EMCDNS_PORT 5335
-        int port = GetArg("-emcdnsport", EMCDNS_PORT);
-        int verbose = GetArg("-emcdnsverbose", 1);
+        #define CRUDNS_PORT 5335
+        int port = GetArg("-crudnsport", CRUDNS_PORT);
+        int verbose = GetArg("-crudnsverbose", 1);
         if (port <= 0)
-            port = EMCDNS_PORT;
-        string suffix  = GetArg("-emcdnssuffix", "");
-        string bind_ip = GetArg("-emcdnsbindip", "");
-        string allowed = GetArg("-emcdnsallowed", "");
-        string localcf = GetArg("-emcdnslocalcf", "");
+            port = CRUDNS_PORT;
+        string suffix  = GetArg("-crudnssuffix", "");
+        string bind_ip = GetArg("-crudnsbindip", "");
+        string allowed = GetArg("-crudnsallowed", "");
+        string localcf = GetArg("-crudnslocalcf", "");
         string enums   = GetArg("-enumtrust", "");
         string tf      = GetArg("-enumtollfree", "");
-        emcdns = new EmcDns(bind_ip.c_str(), port,
+        crudns = new CruDns(bind_ip.c_str(), port,
         suffix.c_str(), allowed.c_str(), localcf.c_str(), enums.c_str(), tf.c_str(), verbose);
         LogPrintf("DNS server started\n");
     }

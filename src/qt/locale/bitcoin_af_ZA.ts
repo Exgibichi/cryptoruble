@@ -143,8 +143,8 @@
         <translation>&amp;Opsies</translation>
     </message>
     <message>
-        <source>Emercoin</source>
-        <translation>Emercoin</translation>
+        <source>Cryptoruble</source>
+        <translation>Cryptoruble</translation>
     </message>
     <message>
         <source>Wallet</source>
