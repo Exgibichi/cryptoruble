@@ -1748,7 +1748,7 @@ bool ppcoinContextualBlockChecks(const CBlock& block, CValidationState& state, C
     pindex->hashProofOfStake = hashProofOfStakeBackup;
   // compute nStakeModifierChecksum end
 
-    if (!CheckStakeModifierCheckpoints(pindex->nHeight, nStakeModifierChecksum))
+    if (pindex->nHeight != 0 && !CheckStakeModifierCheckpoints(pindex->nHeight, nStakeModifierChecksum))
         return error("ConnectBlock() : Rejected by stake modifier checkpoint height=%d, modifier=0x%016llx", pindex->nHeight, nStakeModifier);
 
     if (fJustCheck)
