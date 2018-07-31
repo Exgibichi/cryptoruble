@@ -55,11 +55,6 @@ static void convertSeed6(std::vector<CAddress> &vSeedsOut, const SeedSpec6 *data
 static Checkpoints::MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
         ( 0,     uint256("0x00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d"))
-        ( 25000, uint256("0x20cc6639e9593e4e9344e1d40a234c552da81cb90b991aed6200ff0f72a69719"))
-        ( 50000, uint256("0x4c3d02a982bcb47ed9e076f754870606a6892d258720dc13863e10badbfd0e78"))
-        (100000, uint256("0x0000000000000071c614fefb88072459cced7b9d9a9cffd04064d3c3d539ecaf"))
-        (150000, uint256("0x5d317133f36b13ba3cd335c142e51d7e7007c0e72fd8a0fef48d0f4f63f7827a"))
-        (200000, uint256("0x7af70a03354a9ae3f9bf7f6a1dd3da6b03dcc14f8d6ad237095d73dbeaf5184c"))
         ;
 static const Checkpoints::CCheckpointData data = {
         &mapCheckpoints,
@@ -101,29 +96,29 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0xe6;
-        pchMessageStart[1] = 0xe8;
-        pchMessageStart[2] = 0xe9;
-        pchMessageStart[3] = 0xe5;
+        pchMessageStart[0] = 0x19;
+        pchMessageStart[1] = 0x29;
+        pchMessageStart[2] = 0x39;
+        pchMessageStart[3] = 0x49;
         nDefaultPort = 20180;
-        bnProofOfWorkLimit = ~uint256(0) >> 32;
-        bnInitialHashTarget = ~uint256(0) >> 32;
+        bnProofOfWorkLimit = ~uint256(0) >> 16;
+        bnInitialHashTarget = ~uint256(0) >> 16;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 7 * 24 * 60 * 60; // one week
-        nTargetSpacing = 10 * 60;           // 10 minutes. affects network code only
+        nTargetTimespan = 1 * 24 * 60 * 60; // one week
+        nTargetSpacing = 3 * 60;           // 10 minutes. affects network code only
 
         // ppcoin: PoS spacing = nStakeTargetSpacing
         //         PoW spacing = depends on how much PoS block are between last two PoW blocks, with maximum value = nTargetSpacingMax
         nCoinbaseMaturity = 32;                       // coinbase transaction outputs can only be spent after this number of new blocks
-        nStakeTargetSpacing = 10 * 60;                // 10 minutes
+        nStakeTargetSpacing = 3 * 60;                // 10 minutes
         nTargetSpacingMax = 12 * nStakeTargetSpacing; // 2 hours
-        nStakeMinAge = 60 * 60 * 24 * 30;             // minimum age for coin age
-        nStakeMaxAge = 60 * 60 * 24 * 90;             // stake age of full weight
-        nStakeModifierInterval = 6 * 60 * 60;         // time to elapse before new modifier is computed
-        nMaxTipAge = 24 * 60 * 60;
+        nStakeMinAge = 60 * 60;             // minimum age for coin age
+        nStakeMaxAge = 60 * 60 * 24 * 365;             // stake age of full weight
+        nStakeModifierInterval = 60;         // time to elapse before new modifier is computed
+        nMaxTipAge = 14 * 24 * 60 * 60;
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -135,7 +130,7 @@ public:
          *     CTxOut(nValue=50.00000000, scriptPubKey=0x5F1DF16B2B704C8A578D0B)
          *   vMerkleTree: 4a5e1e
          */
-        const char* pszTimestamp = "2013: Emergence is inevitable! heideg.livejournal.com/313676.html";
+        const char* pszTimestamp = "2018 Cryptoruble start";
         std::vector<CTxIn> vin;
         vin.resize(1);
         vin[0].scriptSig = CScript() << 486604799 << CScriptNum(9999) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -149,17 +144,14 @@ public:
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
         genesis.nTime    = 1386628033;
-        genesis.nBits    = bnProofOfWorkLimit.GetCompact();
+        genesis.nBits    = 0x1f00ffff;
         genesis.nNonce   = 139946546u;
 
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d"));
         assert(genesis.hashMerkleRoot == uint256("0xd8eee032f95716d0cf14231dc7a238b96bbf827e349e75344c9a88e849262ee0"));
 
-        vSeeds.push_back(CDNSSeedData("cryptoruble.com", "seed.cryptoruble.com"));
-        vSeeds.push_back(CDNSSeedData("cryptoruble.net", "seed.cryptoruble.net"));
-        vSeeds.push_back(CDNSSeedData("emergate.net", "seed.emergate.net"));
-        vSeeds.push_back(CDNSSeedData("crudns", "seed.cru"));
+        vSeeds.push_back(CDNSSeedData("cryptoru.info", "seed.cryptoru.info"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(33);   // cryptoruble: addresses begin with 'E'
         base58Prefixes[SCRIPT_ADDRESS] = list_of(92);   // cryptoruble: addresses begin with 'e'
@@ -178,10 +170,10 @@ public:
         fSkipProofOfWorkCheck = false;
         fTestnetToBeDeprecatedFieldRPC = false;
 
-        nBIP34Height = 212806;
-        nBIP65Height = 212920;
-        nBIP66Height = 212806;
-        nMMHeight = 219809;
+        nBIP34Height = 0;
+        nBIP65Height = 0;
+        nBIP66Height = 0;
+        nMMHeight = 0;
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const 
@@ -199,13 +191,13 @@ public:
     CTestNetParams() {
         networkID = CBaseChainParams::TESTNET;
         strNetworkID = "test";
-        pchMessageStart[0] = 0xcb;
-        pchMessageStart[1] = 0xf2;
-        pchMessageStart[2] = 0xc0;
-        pchMessageStart[3] = 0xef;
+        pchMessageStart[0] = 0x18;
+        pchMessageStart[1] = 0x28;
+        pchMessageStart[2] = 0x38;
+        pchMessageStart[3] = 0x48;
         nDefaultPort = 20182;
-        bnProofOfWorkLimit = ~uint256(0) >> 28;
-        bnInitialHashTarget = ~uint256(0) >> 29;
+        bnProofOfWorkLimit = ~uint256(0) >> 16;
+        bnInitialHashTarget = ~uint256(0) >> 16;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
@@ -216,14 +208,13 @@ public:
         nMaxTipAge = 0x7fffffff;
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nBits = bnProofOfWorkLimit.GetCompact();
+        genesis.nBits = 0x1f00ffff;
         genesis.nNonce = 18330017;
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x0000000810da236a5c9239aa1c49ab971de289dbd41d08c4120fc9c8920d2212"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("cryptoruble", "tnseed.cryptoruble.com"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(111);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(196);
@@ -241,10 +232,10 @@ public:
         fMineBlocksOnDemand = false;
         fTestnetToBeDeprecatedFieldRPC = true;
 
-        nBIP34Height = 141;
-        nBIP65Height = 368;
-        nBIP66Height = 141;
-        nMMHeight = 2189;
+        nBIP34Height = 0;
+        nBIP65Height = 0;
+        nBIP66Height = 0;
+        nMMHeight = 0;
     }
     const Checkpoints::CCheckpointData& Checkpoints() const 
     {
@@ -261,10 +252,10 @@ public:
     CRegTestParams() {
         networkID = CBaseChainParams::REGTEST;
         strNetworkID = "regtest";
-        pchMessageStart[0] = 0xcb;
-        pchMessageStart[1] = 0xf2;
-        pchMessageStart[2] = 0xc0;
-        pchMessageStart[3] = 0xef;
+        pchMessageStart[0] = 0x17;
+        pchMessageStart[1] = 0x27;
+        pchMessageStart[2] = 0x37;
+        pchMessageStart[3] = 0x47;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
@@ -274,6 +265,9 @@ public:
         //genesis.nBits = 0x207fffff;
         //genesis.nNonce = 2;
         nMaxTipAge = 24 * 60 * 60;
+        genesis.nTime    = 1508535055;
+        genesis.nNonce = 41490;
+        genesis.nBits    = 0x1f00ffff;
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 20183;
         assert(hashGenesisBlock == uint256("0x0000000810da236a5c9239aa1c49ab971de289dbd41d08c4120fc9c8920d2212"));

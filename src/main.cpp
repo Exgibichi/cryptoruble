@@ -1228,56 +1228,29 @@ bool GuessPoS(const CBlockHeader& header)
     // cryptoruble: in our official blockchain we currently have max PoS == 37.4635 (for blocks 1..129646)
     // it is probably safe to assume that it won't go over 1000
     // it is also probably safe to assume, that PoW difficulty will never drop to 1000 or below (it would require less than 7.15 GH/S of mining power over entire network!)
-    return GetDifficulty(header.nBits) <= 1000 ? true : false;
+    return GetDifficulty(header.nBits) <= 1 ? true : false;
 }
 
-CAmount GetProofOfWorkReward(unsigned int nBits)
+CAmount GetProofOfWorkReward(unsigned int nHeight)
 {
-    CBigNum bnSubsidyLimit = MAX_MINT_PROOF_OF_WORK;
-    CBigNum bnTarget;
-    bnTarget.SetCompact(nBits);
-    CBigNum bnTargetLimit(Params().ProofOfWorkLimit());
-    bnTargetLimit.SetCompact(bnTargetLimit.GetCompact());
-
-    // ppcoin: subsidy is cut in half every 16x multiply of difficulty
-    // A reasonably continuous curve is used to avoid shock to market
-    // (nSubsidyLimit / nSubsidy) ** 4 == bnProofOfWorkLimit / bnTarget
-    CBigNum bnLowerBound = CENT;
-    CBigNum bnUpperBound = bnSubsidyLimit;
-    CBigNum bnMidPart, bnRewardPart;
-
-    bool bLowDiff = GetDifficulty(nBits) < 512;
-    bnRewardPart = bLowDiff ? bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit :
-                              bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit;
-    while (bnLowerBound + CENT <= bnUpperBound)
-    {
-        CBigNum bnMidValue = (bnLowerBound + bnUpperBound) / 2;
-        bnMidPart = bLowDiff ? bnMidValue * bnMidValue * bnMidValue * bnMidValue * bnMidValue * bnMidValue :
-                               bnMidValue * bnMidValue * bnMidValue * bnMidValue;
-        if (fDebug && GetBoolArg("-printcreation", false))
-            LogPrintf("GetProofOfWorkReward() : lower=%lld upper=%lld mid=%lld\n", bnLowerBound.getuint64(), bnUpperBound.getuint64(), bnMidValue.getuint64());
-
-        if (bnMidPart * bnTargetLimit > bnRewardPart * bnTarget)
-            bnUpperBound = bnMidValue;
-        else
-            bnLowerBound = bnMidValue;
+    CAmount nSubsidy = MAX_MINT_PROOF_OF_WORK;
+    if (nHeight <= 100) {
+        return nSubsidy;
     }
-
-    CAmount nSubsidy = bnUpperBound.getuint64();
-    nSubsidy = (nSubsidy / CENT) * CENT;
-    if (fDebug && GetBoolArg("-printcreation", false))
-        LogPrintf("GetProofOfWorkReward() : create=%s nBits=0x%08x nSubsidy=%lld\n", FormatMoney(nSubsidy), nBits, nSubsidy);
-
-    return min(nSubsidy, MAX_MINT_PROOF_OF_WORK);
+    return 0;
 }
 
 // ppcoin: miner's coin stake is rewarded based on coin age spent (coin-days)
 CAmount GetProofOfStakeReward(int64_t nCoinAge)
 {
-    static int64_t nRewardCoinYear = 6 * CENT;  // creation amount per coin-year
+    static int64_t nRewardCoinYear = 3800 * CENT;  // creation amount per coin-year
     int64_t nSubsidy = nCoinAge * 33 / (365 * 33 + 8) * nRewardCoinYear;
-    if (fDebug && GetBoolArg("-printcreation", false))
+    if (fDebug && GetBoolArg("-printcreation", false)) {
         LogPrintf("GetProofOfStakeReward(): create=%s nCoinAge=%lld\n", FormatMoney(nSubsidy), nCoinAge);
+    }
+    if(nSubsidy < 0.01) {
+        nSubsidy = 0.01 * COIN;
+    }
     return nSubsidy;
 }
 
@@ -1799,14 +1772,14 @@ bool ppcoinContextualBlockChecks(const CBlock& block, CValidationState& state, C
 
 static bool CheckCoinbaseReward(const CBlock& block, CValidationState& state, CBlockIndex * const pindexPrev)
 {
-    // cryptoruble: moved from CheckBlock(), because this check now depends on context
+    // neko: moved from CheckBlock(), because this check now depends on context
     // Check coinbase reward
     bool fV6Rule = block.GetBlockVersion() >= 6 && CBlockIndex::IsSuperMajority(6, pindexPrev, Params().RejectBlockOutdatedMajority());
     CAmount txFeeCancelation = fV6Rule ? MIN_TX_FEE : CENT;
-    CAmount powLimit = block.IsProofOfWork() ? GetProofOfWorkReward(block.nBits) - block.vtx[0].GetMinFee() + txFeeCancelation : 0;
+    unsigned int nHeight = pindexPrev && pindexPrev->nHeight ? pindexPrev->nHeight : 1;
+    CAmount powLimit = block.IsProofOfWork() ? GetProofOfWorkReward(nHeight) - block.vtx[0].GetMinFee() + txFeeCancelation : 0;
     if (block.vtx[0].GetValueOut() > powLimit)
-        return state.DoS(100, error("ContextualCheckBlock() : coinbase pays too much (actual=%d vs limit=%d)",
-                         block.vtx[0].GetValueOut(), powLimit), REJECT_INVALID, "bad-cb-amount");
+        return state.DoS(100, error("ContextualCheckBlock() : coinbase pays too much (actual=%d vs limit=%d)", block.vtx[0].GetValueOut(), powLimit), REJECT_INVALID, "bad-cb-amount");
     else
         return true;
 }
@@ -3919,7 +3892,8 @@ string GetWarnings(string strFor)
     if (!RPCIsInWarmup(&statusmessage) && CheckpointsSync::IsSyncCheckpointTooOld(60 * 60 * 24 * 10))
     {
         nPriority = 100;
-        strStatusBar = "WARNING: Checkpoint is too old. Wait for block chain to download, or notify developers of the issue.";
+        // strStatusBar = "WARNING: Checkpoint is too old. Wait for block chain to download, or notify developers of the issue.";
+        strStatusBar = "";
     }
 
     // Misc warnings like out of disk space and clock is wrong

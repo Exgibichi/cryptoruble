@@ -105,9 +105,9 @@ static const unsigned char REJECT_INSUFFICIENTFEE = 0x42;
 static const unsigned char REJECT_CHECKPOINT = 0x43;
 
 /** cryptoruble constants */
-static const CAmount MAX_MINT_PROOF_OF_WORK = 5020 * COIN;
+static const CAmount MAX_MINT_PROOF_OF_WORK = 10000 * COIN;
 static const CAmount MIN_TXOUT_AMOUNT = MIN_TX_FEE;
-static const int STAKE_MIN_AGE = 60 * 60 * 24 * 30;      // minimum age for coin age
+static const int STAKE_MIN_AGE = 60 * 60;      // minimum age for coin age
 static const int64_t nMaxClockDrift = 2 * 60 * 60;       // two hours
 
 /** ppcoin values */
@@ -210,7 +210,7 @@ bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock, b
 bool ActivateBestChain(CValidationState &state, CBlock *pblock = NULL);
 
 // cryptoruble: reward for blocks
-CAmount GetProofOfWorkReward(unsigned int nBits);
+CAmount GetProofOfWorkReward(unsigned int nHeight);
 CAmount GetProofOfStakeReward(int64_t nCoinAge);
 
 /** Create a new block index entry for a given block hash */
