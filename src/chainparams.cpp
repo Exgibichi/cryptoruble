@@ -147,6 +147,14 @@ public:
         genesis.nBits    = 0x1f00ffff;
         genesis.nNonce   = 139946546u;
 
+        if (true) {
+            LogPrintf("%s\n","recalculating params for mainnet.\n");
+            LogPrintf("old mainnet genesis: %s\n", genesis.ToString().c_str());
+            uint256 hashTarget = uint256().SetCompact(0x1f00ffff);
+            for(genesis.nNonce = 0; genesis.GetHash() > hashTarget; genesis.nNonce++){ }
+            LogPrintf("new mainnet genesis: %s\n", genesis.ToString().c_str());
+        }
+
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d"));
         assert(genesis.hashMerkleRoot == uint256("0xd8eee032f95716d0cf14231dc7a238b96bbf827e349e75344c9a88e849262ee0"));
@@ -210,6 +218,15 @@ public:
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nBits = 0x1f00ffff;
         genesis.nNonce = 18330017;
+        genesis.nTime = 1508535054;
+
+        if (true) {
+            LogPrintf("%s\n","recalculating params for testnet.\n");
+            LogPrintf("old testnet genesis: %s\n", genesis.ToString().c_str());
+            uint256 hashTarget = uint256().SetCompact(0x1f00ffff);
+            for(genesis.nNonce = 0; genesis.GetHash() > hashTarget; genesis.nNonce++){ }
+            LogPrintf("new testnet genesis: %s\n", genesis.ToString().c_str());
+        }
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x0000000810da236a5c9239aa1c49ab971de289dbd41d08c4120fc9c8920d2212"));
 
@@ -268,6 +285,14 @@ public:
         genesis.nTime    = 1508535055;
         genesis.nNonce = 41490;
         genesis.nBits    = 0x1f00ffff;
+         
+        if (true) {
+            LogPrintf("%s\n","recalculating params for regtestnet.\n");
+            LogPrintf("old regtestnet genesis: %s\n", genesis.ToString().c_str());
+            uint256 hashTarget = uint256().SetCompact(0x1f00ffff);
+            for(genesis.nNonce = 0; genesis.GetHash() > hashTarget; genesis.nNonce++){ }
+            LogPrintf("new regtestnet genesis: %s\n", genesis.ToString().c_str());
+        }
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 20183;
         assert(hashGenesisBlock == uint256("0x0000000810da236a5c9239aa1c49ab971de289dbd41d08c4120fc9c8920d2212"));
