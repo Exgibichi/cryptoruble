@@ -11,15 +11,9 @@
 #include "random.h"
 
 #include "ecwrapper.h"
-#include <openssl/opensslv.h>
 #include <secp256k1.h>
 
-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
-typedef struct ECDSA_SIG_st {
-    BIGNUM* r;
-    BIGNUM* s;
-} ECDSA_SIG;
-#endif
+
 //! anonymous namespace
 namespace {
 
