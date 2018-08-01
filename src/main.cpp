@@ -1234,7 +1234,7 @@ bool GuessPoS(const CBlockHeader& header)
 CAmount GetProofOfWorkReward(unsigned int nHeight)
 {
     CAmount nSubsidy = MAX_MINT_PROOF_OF_WORK;
-    if (nHeight <= 100) {
+    if (nHeight <= 1000) {
         return nSubsidy;
     }
     return 0;
@@ -1245,10 +1245,10 @@ CAmount GetProofOfStakeReward(int64_t nCoinAge)
 {
     static int64_t nRewardCoinYear = 3800 * CENT;  // creation amount per coin-year
     int64_t nSubsidy = nCoinAge * 33 / (365 * 33 + 8) * nRewardCoinYear;
-    if (fDebug && GetBoolArg("-printcreation", false)) {
+    // if (fDebug && GetBoolArg("-printcreation", false)) {
         LogPrintf("GetProofOfStakeReward(): create=%s nCoinAge=%lld\n", FormatMoney(nSubsidy), nCoinAge);
-    }
-    if(nSubsidy < 0.01) {
+    // }
+    if (nSubsidy < (0.01 * COIN)) {
         nSubsidy = 0.01 * COIN;
     }
     return nSubsidy;
@@ -1786,15 +1786,25 @@ static bool CheckCoinbaseReward(const CBlock& block, CValidationState& state, CB
 
 bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pindex, CCoinsViewCache& view, bool fJustCheck, bool fWriteNames)
 {
-    if (!ppcoinContextualBlockChecks(block, state, pindex, fJustCheck))
+    if (!ppcoinContextualBlockChecks(block, state, pindex, fJustCheck)){
+        LogPrintf("context 3 invalid\n");
         return false;
+    }
 
     AssertLockHeld(cs_main);
     // Check it again in case a previous version let a bad block in
-    if (!CheckBlock(block, state, !fJustCheck, !fJustCheck, !fJustCheck) ||
-        !CheckCoinbaseReward(block, state, pindex->pprev) ||
-        !CheckMinTxOut(block, pindex->pprev))
+    if (!CheckBlock(block, state, !fJustCheck, !fJustCheck, !fJustCheck)) {
+        LogPrintf("check 2 invalid\n");
         return false;
+    }
+    if (!CheckCoinbaseReward(block, state, pindex->pprev)) {
+        LogPrintf("coinbase invalid\n");
+        return false;
+    }
+    if (!CheckMinTxOut(block, pindex->pprev)) {
+        LogPrintf("mintxout invalid\n");
+        return false;
+    }
 
     // verify that the view's current state corresponds to the previous block
     uint256 hashPrevBlock = pindex->pprev == NULL ? uint256(0) : pindex->pprev->GetBlockHash();
@@ -3143,16 +3153,24 @@ bool TestBlockValidity(CValidationState &state, const CBlock& block, CBlockIndex
     CBlockIndex indexDummy(block);
     indexDummy.pprev = pindexPrev;
     indexDummy.nHeight = pindexPrev->nHeight + 1;
-
+    LogPrintf("block validation %s\n", block.ToString().c_str());
     // NOTE: CheckBlockHeader is called by CheckBlock
-    if (!ContextualCheckBlockHeader(block, block.IsProofOfStake(), state, pindexPrev))
+    if (!ContextualCheckBlockHeader(block, block.IsProofOfStake(), state, pindexPrev)) {
+        LogPrintf("context invalid\n");
         return false;
-    if (!CheckBlock(block, state, fCheckPOW, fCheckMerkleRoot, fCheckSign))
+    }
+    if (!CheckBlock(block, state, fCheckPOW, fCheckMerkleRoot, fCheckSign)) {
+        LogPrintf("check invalid\n");
         return false;
-    if (!ContextualCheckBlock(block, state, pindexPrev))
+    }
+    if (!ContextualCheckBlock(block, state, pindexPrev)) {
+        LogPrintf("context 2 invalid\n");
         return false;
-    if (!ConnectBlock(block, state, &indexDummy, viewNew, true))
+    }
+    if (!ConnectBlock(block, state, &indexDummy, viewNew, true)) {
+        LogPrintf("connect invalid\n");
         return false;
+    }
     assert(state.IsValid());
 
     return true;
@@ -3231,12 +3249,16 @@ bool CheckMinTxOut(const CTransaction& tx, int nVersion, CBlockIndex *pindexPrev
 bool CheckMinTxOut(const CBlock& block, CBlockIndex *pindexPrev)
 {
     CAmount minOut = GetMinTxOut(block.GetBlockVersion(), pindexPrev);
+    bool isEmpty = false;
+    bool isLessThanMin = false;
+    LogPrintf("minOut %d\n", minOut);
     BOOST_FOREACH(const CTransaction& tx, block.vtx)
         BOOST_FOREACH(const CTxOut& txout, tx.vout)
         {
-            // ppcoin: enforce minimum output amount
-            if ((!txout.IsEmpty()) && txout.nValue < minOut)
+            LogPrintf("new tx %s\n", txout.ToString());
+            if ((!txout.IsEmpty()) && txout.nValue < minOut){
                 return false;
+            }
         }
     return true;
 }

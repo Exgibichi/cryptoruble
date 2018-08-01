@@ -115,7 +115,7 @@ public:
         nCoinbaseMaturity = 32;                       // coinbase transaction outputs can only be spent after this number of new blocks
         nStakeTargetSpacing = 3 * 60;                // 10 minutes
         nTargetSpacingMax = 12 * nStakeTargetSpacing; // 2 hours
-        nStakeMinAge = 60 * 60;             // minimum age for coin age
+        nStakeMinAge = 60;             // minimum age for coin age
         nStakeMaxAge = 60 * 60 * 24 * 365;             // stake age of full weight
         nStakeModifierInterval = 60;         // time to elapse before new modifier is computed
         nMaxTipAge = 14 * 24 * 60 * 60;
@@ -161,8 +161,8 @@ public:
 
         vSeeds.push_back(CDNSSeedData("cryptoru.info", "seed.cryptoru.info"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = list_of(0x14)(0xA8)(0xD3);   // cryptoruble: addresses begin with 'cRu'
-        base58Prefixes[SCRIPT_ADDRESS] = list_of(0x2B);   // cryptoruble: addresses begin with 's'
+        base58Prefixes[PUBKEY_ADDRESS] = list_of(87);   // cryptoruble: addresses begin with 'c'
+        base58Prefixes[SCRIPT_ADDRESS] = list_of(33);   // cryptoruble: addresses begin with 's'
         base58Prefixes[SECRET_KEY] =     list_of(128);
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E);
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x88)(0xAD)(0xE4);
@@ -233,7 +233,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        base58Prefixes[PUBKEY_ADDRESS] = list_of(111);
+        base58Prefixes[PUBKEY_ADDRESS] = list_of(87);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(196);
         base58Prefixes[SECRET_KEY]     = list_of(239);
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x35)(0x87)(0xCF);
