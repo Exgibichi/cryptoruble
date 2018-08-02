@@ -1241,13 +1241,12 @@ CAmount GetProofOfWorkReward(unsigned int nHeight)
 }
 
 // ppcoin: miner's coin stake is rewarded based on coin age spent (coin-days)
-CAmount GetProofOfStakeReward(int64_t nCoinAge)
+CAmount GetProofOfStakeReward(CAmount nCredit)
 {
-    static int64_t nRewardCoinYear = 3800 * CENT;  // creation amount per coin-year
-    int64_t nSubsidy = nCoinAge * 33 / (365 * 33 + 8) * nRewardCoinYear;
-    // if (fDebug && GetBoolArg("-printcreation", false)) {
-        LogPrintf("GetProofOfStakeReward(): create=%s nCoinAge=%lld\n", FormatMoney(nSubsidy), nCoinAge);
-    // }
+    int64_t nSubsidy = ((nCredit/100)*1)/480;
+    if (fDebug && GetBoolArg("-printcreation", false)) {
+    LogPrintf("GetProofOfStakeReward(): create=%s nCredit=%s\n", FormatMoney(nSubsidy), FormatMoney(nCredit));
+    }
     if (nSubsidy < (0.01 * COIN)) {
         nSubsidy = 0.01 * COIN;
     }
@@ -1933,7 +1932,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                 int64_t nStakeReward = tx.GetValueOut() - nValueIn;
                 bool fV6Rule = block.GetBlockVersion() >= 6 && CBlockIndex::IsSuperMajority(6, pindex->pprev, Params().RejectBlockOutdatedMajority());
                 CAmount txFeeCancelation = fV6Rule ? MIN_TX_FEE : CENT;
-                if (nStakeReward > GetProofOfStakeReward(nCoinAge) - tx.GetMinFee() + txFeeCancelation)
+                if (nStakeReward > GetProofOfStakeReward(nValueIn) - tx.GetMinFee() + txFeeCancelation)
                     return state.DoS(100, error("ConnectBlock() : %s stake reward exceeded", tx.GetHash().ToString()),
                                      REJECT_INVALID, "bad-txns-coinstake-too-large");
             }

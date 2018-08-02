@@ -115,9 +115,9 @@ public:
         nCoinbaseMaturity = 32;                       // coinbase transaction outputs can only be spent after this number of new blocks
         nStakeTargetSpacing = 3 * 60;                // 10 minutes
         nTargetSpacingMax = 12 * nStakeTargetSpacing; // 2 hours
-        nStakeMinAge = 60;             // minimum age for coin age
+        nStakeMinAge = 60 * 60;             // minimum age for coin age
         nStakeMaxAge = 60 * 60 * 24 * 365;             // stake age of full weight
-        nStakeModifierInterval = 60;         // time to elapse before new modifier is computed
+        nStakeModifierInterval = 60 * 60;         // time to elapse before new modifier is computed
         nMaxTipAge = 14 * 24 * 60 * 60;
 
         /**

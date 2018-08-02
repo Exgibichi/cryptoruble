@@ -1162,12 +1162,6 @@ CAmount CWallet::GetStake() const
     for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
     {
         const CWalletTx* pcoin = &(*it).second;
-        if (pcoin->IsCoinStake()) {
-            LogPrintf("coin stake\n");
-        }
-        LogPrintf("maturity %d\n", pcoin->GetBlocksToMaturity());
-    
-        // if (pcoin->IsCoinStake() && pcoin->GetBlocksToMaturity() > 0 && pcoin->GetDepthInMainChain() > 0)
         if (pcoin->IsCoinStake() && pcoin->GetBlocksToMaturity() > 0 && pcoin->GetDepthInMainChain() > 0)
             nTotal += CWallet::GetCredit(*pcoin, ISMINE_ALL);
     }
@@ -1919,7 +1913,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 break;
             }
         }
-        if (fKernelFound)
+        if (fKernelFound) 
             break; // if kernel is found stop searching
     }
     if (nCredit == 0 || nCredit > nBalance - nReserveBalance)
@@ -1957,7 +1951,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         CCoinsViewCache view(*pcoinsTip);
         if (!GetCoinAge(txNew, view, nCoinAge))
             return error("CreateCoinStake : failed to calculate coin age");
-        nCredit += GetProofOfStakeReward(nCoinAge);
+        nCredit += GetProofOfStakeReward(nCredit);
     }
 
     CAmount nMinFee = 0;
@@ -2001,7 +1995,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             break;
         }
     }
-
+    
     // Successfully generated coinstake
     // Remove block reference from the cache
     delete pbo->value.first;
