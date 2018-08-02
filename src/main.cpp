@@ -3248,13 +3248,9 @@ bool CheckMinTxOut(const CTransaction& tx, int nVersion, CBlockIndex *pindexPrev
 bool CheckMinTxOut(const CBlock& block, CBlockIndex *pindexPrev)
 {
     CAmount minOut = GetMinTxOut(block.GetBlockVersion(), pindexPrev);
-    bool isEmpty = false;
-    bool isLessThanMin = false;
-    LogPrintf("minOut %d\n", minOut);
     BOOST_FOREACH(const CTransaction& tx, block.vtx)
         BOOST_FOREACH(const CTxOut& txout, tx.vout)
         {
-            LogPrintf("new tx %s\n", txout.ToString());
             if ((!txout.IsEmpty()) && txout.nValue < minOut){
                 return false;
             }
