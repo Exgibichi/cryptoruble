@@ -147,19 +147,12 @@ public:
         genesis.nBits    = 0x1f00ffff;
         genesis.nNonce = 23992;
 
-        if (false) {
-            LogPrintf("%s\n", "recalculating params for mainnet.\n");
-            LogPrintf("old mainnet genesis: %s\n", genesis.ToString().c_str());
-            uint256 hashTarget = uint256().SetCompact(0x1f00ffff);
-            for(genesis.nNonce = 0; genesis.GetHash() > hashTarget; genesis.nNonce++){ }
-            LogPrintf("new mainnet genesis: %s\n", genesis.ToString().c_str());
-        }
-
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("00009c1f78f2cf76ce211db15ccf0bb0a25cc8ff49dc05679be146b41a108bdc"));
         assert(genesis.hashMerkleRoot == uint256("462d7e29e37d67680b41dbfb83b0c4f5a0f2fe6959716774be159adbdfa1e54d"));
 
         vSeeds.push_back(CDNSSeedData("cryptoru.info", "seed.cryptoru.info"));
+        vSeeds.push_back(CDNSSeedData("cryptoru.info", "explorer.cryptoru.info"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(87);   // cryptoruble: addresses begin with 'c'
         base58Prefixes[SCRIPT_ADDRESS] = list_of(33);   // cryptoruble: addresses begin with 's'
@@ -220,13 +213,6 @@ public:
         genesis.nNonce = 39648;
         genesis.nTime = 1533061255;
 
-        if (false) {
-            LogPrintf("%s\n","recalculating params for testnet.\n");
-            LogPrintf("old testnet genesis: %s\n", genesis.ToString().c_str());
-            uint256 hashTarget = uint256().SetCompact(0x1f00ffff);
-            for(genesis.nNonce = 0; genesis.GetHash() > hashTarget; genesis.nNonce++){ }
-            LogPrintf("new testnet genesis: %s\n", genesis.ToString().c_str());
-        }
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0000e0a213ed1fb91f5cd533aafafd5708e751270194890492432976b308773a"));
 
@@ -286,13 +272,6 @@ public:
         genesis.nNonce = 124914;
         genesis.nBits    = 0x1f00ffff;
 
-        if (false) {
-            LogPrintf("%s\n","recalculating params for regtestnet.\n");
-            LogPrintf("old regtestnet genesis: %s\n", genesis.ToString().c_str());
-            uint256 hashTarget = uint256().SetCompact(0x1f00ffff);
-            for(genesis.nNonce = 0; genesis.GetHash() > hashTarget; genesis.nNonce++){ }
-            LogPrintf("new regtestnet genesis: %s\n", genesis.ToString().c_str());
-        }
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 20183;
         assert(hashGenesisBlock == uint256("000081e0a1e1c449a3ff79853271218133e8b27a1e2e56ae67040b9447446f49"));

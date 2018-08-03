@@ -1241,13 +1241,14 @@ CAmount GetProofOfWorkReward(unsigned int nHeight)
 }
 
 // ppcoin: miner's coin stake is rewarded based on coin age spent (coin-days)
-CAmount GetProofOfStakeReward(CAmount nCredit)
+CAmount GetProofOfStakeReward(int64_t nCoinAge)
 {
-    int64_t nSubsidy = ((nCredit/100)*1)/480;
+    static int64_t nRewardCoinYear = 3800 * CENT; // creation amount per coin-year
+    int64_t nSubsidy = nCoinAge * 33 / (365 * 33 + 8) * nRewardCoinYear;
     if (fDebug && GetBoolArg("-printcreation", false)) {
-    LogPrintf("GetProofOfStakeReward(): create=%s nCredit=%s\n", FormatMoney(nSubsidy), FormatMoney(nCredit));
+        LogPrintf("GetProofOfStakeReward(): create=%s nCoinAge=%lld\n", FormatMoney(nSubsidy), nCoinAge);
     }
-    if (nSubsidy < (0.01 * COIN)) {
+    if (nSubsidy < 0.01 * COIN) {
         nSubsidy = 0.01 * COIN;
     }
     return nSubsidy;
