@@ -1933,7 +1933,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                 int64_t nStakeReward = tx.GetValueOut() - nValueIn;
                 bool fV6Rule = block.GetBlockVersion() >= 6 && CBlockIndex::IsSuperMajority(6, pindex->pprev, Params().RejectBlockOutdatedMajority());
                 CAmount txFeeCancelation = fV6Rule ? MIN_TX_FEE : CENT;
-                if (nStakeReward > GetProofOfStakeReward(nValueIn) - tx.GetMinFee() + txFeeCancelation)
+                if (nStakeReward > GetProofOfStakeReward(nCoinAge) - tx.GetMinFee() + txFeeCancelation)
                     return state.DoS(100, error("ConnectBlock() : %s stake reward exceeded", tx.GetHash().ToString()),
                                      REJECT_INVALID, "bad-txns-coinstake-too-large");
             }

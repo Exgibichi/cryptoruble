@@ -211,7 +211,7 @@ bool ActivateBestChain(CValidationState &state, CBlock *pblock = NULL);
 
 // cryptoruble: reward for blocks
 CAmount GetProofOfWorkReward(unsigned int nHeight);
-CAmount GetProofOfStakeReward(CAmount nCredit);
+CAmount GetProofOfStakeReward(int64_t nCoinAge);
 
 /** Create a new block index entry for a given block hash */
 CBlockIndex * InsertBlockIndex(uint256 hash);
