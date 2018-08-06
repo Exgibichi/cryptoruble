@@ -101,7 +101,7 @@ void SendCoinsEntry::setModel(WalletModel *model)
             this->eBox.Reset(sAddress);
         else
         {
-            ui->checkBoxExch->setDisabled(true);
+            // ui->checkBoxExch->setDisabled(true);
             ui->exchWidget->setVisible(false);
             ui->exchWidget->setDisabled(true);
         }
