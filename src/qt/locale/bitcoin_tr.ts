@@ -3051,11 +3051,11 @@ Adres: %4
         <translation>İlgili bir uyarı alındığında ya da gerçekten uzun bir çatallama gördüğümüzde komutu çalıştır (komuttaki %s mesaj ile değiştirilir)</translation>
     </message>
     <message>
-        <source>Fees (in RUB/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <source>Fees (in CRUB/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
         <translation>Kb başına RUB olarak bundan düşük ücretler aktarım için sıfır değerinde ücret olarak kabul edilir (varsayılan: %s)</translation>
     </message>
     <message>
-        <source>Fees (in RUB/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <source>Fees (in CRUB/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
         <translation>Kb başına RUB olarak bundan düşük ücretler muamele oluşturulması için sıfır değerinde ücret olarak kabul edilir (varsayılan: %s)</translation>
     </message>
     <message>
@@ -3163,7 +3163,7 @@ mesela: alertnotify=echo %%s | mail -s "Cryptoruble Alert" admin@foo.com
         <translation>Hata: Deskteklenmeyen -tor argümanı bulundu, -onion kullanınız.</translation>
     </message>
     <message>
-        <source>Fee (in RUB/Kb) to add to transactions you send (default: %s)</source>
+        <source>Fee (in CRUB/Kb) to add to transactions you send (default: %s)</source>
         <translation>Yolladığınız muamelelere kB başına RUB olarak eklenecek ücret (varsayılan: %s)</translation>
     </message>
     <message>
